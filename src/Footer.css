@@ -1,0 +1,25 @@
+footer {
+  background: #333;
+  color: white;
+  padding: 0;
+  text-align: center;
+  display: flex;
+}
+
+footer button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #017BFF;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 0;
+  flex: 1;
+  align-self: stretch;
+  font-size: 1.5rem;
+}
+
+footer button:hover {
+  background: #1a67bb;
+}
+

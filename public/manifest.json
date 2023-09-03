@@ -1,0 +1,33 @@
+{
+  "description": "Liste de courses",
+  "short_name": "Liste de courses",
+  "name": "Liste de courses",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "icons/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "fr-FR",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#24c4bc",
+  "prefer_related_applications": true,
+  "dir": "ltr",
+  "background_color": "#ffffff",
+  "related_applications": [{
+    "id": "io.homeassistant.companion.android",
+    "platform": "play"
+  }]
+}

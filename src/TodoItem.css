@@ -1,0 +1,73 @@
+.todo-item {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  background: #fafafa;
+  transition: background 0.3s, text-decoration 0.3s, opacity 0.3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.todo-item span {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.todo-item.strikethrough span {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.todo-item.checked {
+  background: #eaeaea;
+}
+
+input[type="checkbox"] {
+  margin-top: 0.2rem;
+  margin-left: 1rem;
+  margin-bottom: 0.2rem;
+  margin-right: 1rem;
+}
+
+.todo-item .archive {
+  border: none;
+  background: none;
+  padding: 2px 5px 0 20px;
+  cursor: pointer;
+}
+
+.todo-item .archive {
+  border: none;
+  background: #017BFF;
+  padding: 2px 10px 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid #1a67bb;
+}
+
+.todo-item .archive:hover {
+  background: #1a67bb;
+}
+
+.todo-item .delete {
+  border: none;
+  background: #ff0101;
+  padding: 2px 10px 0 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  border-bottom: 2px solid #cb0505;
+  margin-right: 10px;
+}
+
+.todo-item .delete:hover {
+  background: #cb0505;
+}

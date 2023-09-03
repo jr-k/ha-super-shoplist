@@ -1,0 +1,75 @@
+
+
+header {
+  background: #333;
+  color: white;
+  text-align: center;
+  display: flex;
+  padding: 0;
+  border-bottom: 1px solid #DDD;
+}
+
+header button {
+  margin: 0;
+  padding: 0.3rem 1rem;
+  background: #FFF;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+  flex: 1;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 5px solid transparent;
+}
+
+header button .inner {
+  border-radius: 4px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+header button .inner span {
+
+}
+
+header button:last-child {
+  border-right: none;
+}
+
+header button:hover {
+  border-bottom: 5px solid #DDD;
+}
+
+header button.active {
+  border-bottom: 5px solid #017BFF;
+}
+
+header .tab-name-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+header .badge {
+  background: #017BFF;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+  font-size: 10px;
+  display: inline-block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 0.8;
+  margin-left: 5px;
+}

@@ -1,0 +1,9 @@
+{
+    "domain": "hadb",
+    "name": "HA Database",
+    "version": "0.1",
+    "documentation": "https://github.com/jr-k/hadb",
+    "dependencies": [],
+    "codeowners": ["@jr-k"],
+    "requirements": []
+}

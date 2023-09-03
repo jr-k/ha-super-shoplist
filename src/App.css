@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+input[type="text"],
+select,
+textarea {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
+  background-size: 12px;
+  padding-right: 24px;
+  margin-bottom: 10px;
+}
+
+button.close:hover {
+  background: #c40e0e;
+}
+button.close {
+  background: #ff0101;
+  color: white;
+}
+
+
+button.add:hover {
+  background: #1a67bb;
+}
+button.add {
+  background: #017BFF;
+  color: white;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
