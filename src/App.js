@@ -21,10 +21,11 @@ const getInitialTab = () => {
     return null;
 };
 
+const TODOS_KEY = window.location.pathname.substring(1) || 'todos';
+
 function App() {
     const [todos, setTodos] = useState(null);
     const [tab, setTab] = useState(getInitialTab() || 'pending');
-    const TODOS_KEY = window.location.pathname.substring(1) || 'todos';
 
     useEffect(() => {
         document.location.hash = tab;

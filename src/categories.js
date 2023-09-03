@@ -1,4 +1,4 @@
-export default {
+const categories = {
   "meat": { name: "Boucherie", icon: "🥩", id: "meat" },
   "fish": { name: "Poissonerie", icon: "🐟", id: "fish" },
   "milk": { name: "Laitages", icon: "🧀", id: "milk" },
@@ -9,3 +9,8 @@ export default {
   "frozen": { name: "Surgelé", icon: "❄️", id: "frozen" },
   "bread": { name: "Boulangerie", icon: "🥐", id: "bread" }
 };
+
+export default categories;
+
+
+

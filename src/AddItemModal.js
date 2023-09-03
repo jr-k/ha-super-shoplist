@@ -37,7 +37,7 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
         return () => {
             window.removeEventListener('keydown', handleEscape);
         };
-    }, []);
+    }, [onClose]);
 
     if (!isOpen) return null;
 

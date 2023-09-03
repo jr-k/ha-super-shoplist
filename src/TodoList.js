@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './TodoList.css';
 import TodoItem from "./TodoItem";
 import categories from "./categories";
