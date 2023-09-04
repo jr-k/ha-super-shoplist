@@ -4,6 +4,7 @@ footer {
   padding: 0;
   text-align: center;
   display: flex;
+  height: 54px;
 }
 
 footer button {

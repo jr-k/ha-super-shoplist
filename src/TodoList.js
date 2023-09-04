@@ -55,7 +55,7 @@ function TodoList({ todos, setTodos, tab }) {
 
     return (
         <main>
-            <div className="todo-list">
+            <div className="todo-list" style={{maxHeight: window.innerHeight - (54 * 2)}}>
                 {Object.keys(sortedTodosByCategory).map(categoryId => {
                     return (
                         <div key={categoryId} className={"category-items"}>

@@ -27,5 +27,6 @@ code {
 
 #root {
   display: flex;
+  align-self: stretch;
   flex: 1;
 }

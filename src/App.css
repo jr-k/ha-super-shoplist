@@ -7,8 +7,10 @@
 }
 
 main {
-  flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  align-self: stretch;
+  flex: 1;
 }
 
 input[type="text"],

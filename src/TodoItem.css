@@ -39,6 +39,7 @@ input[type="checkbox"] {
   background: none;
   padding: 2px 5px 0 20px;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 .todo-item .archive {
