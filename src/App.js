@@ -21,7 +21,7 @@ const getInitialTab = () => {
     return null;
 };
 
-const TODOS_KEY = window.location.pathname.substring(1) || 'todos';
+const TODOS_KEY = window.location.pathname.substring(1).replace(process.env.PUBLIC_URL, '') || 'todos';
 
 function App() {
     const [todos, setTodos] = useState(null);
