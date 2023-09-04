@@ -6,7 +6,7 @@ function Footer({ setTodos, todos, tab }) {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const handleAddItems = (items) => {
-        setTodos({...items, ...todos});
+        setTodos({...todos, ...items});
     };
 
     <button onClick={() => setModalOpen(true)}>Ajouter un élément</button>
