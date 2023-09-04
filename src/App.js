@@ -21,7 +21,7 @@ const getInitialTab = () => {
     return null;
 };
 
-const TODOS_KEY = window.location.pathname.replace(process.env.REACT_APP_PUBLIC_URL, '').substring(1) || 'todos';
+const TODOS_KEY = window.location.pathname.replace(process.env.PUBLIC_URL, '').substring(1) || 'todos';
 console.info("Using todos key: ", TODOS_KEY);
 
 function App() {
