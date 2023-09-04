@@ -26,57 +26,133 @@ const TODOS_KEY = window.location.pathname.replace(process.env.PUBLIC_URL, '').s
 console.info("Using todos key: ", TODOS_KEY);
 
 function App() {
+    const [needRefresh, setNeedRefresh] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [todos, setTodos] = useState(null);
     const [tab, setTab] = useState(getInitialTab() || 'pending');
 
-    useEffect(() => {
-        document.location.hash = tab;
-    }, [tab]);
+    const fetchRemoteStore = async () => {
+        if (isLoading) return;
+        setIsLoading(true);
 
-    useEffect(() => {
-        if (todos === null) {
-            return;
+        try {
+            const response = await fetch(`${process.env.REACT_APP_HASS_URL}/api/hadb/store?key=${TODOS_KEY}`, {
+                method: 'GET',
+                headers: HEADERS
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to store data');
+            }
+
+            const responseJson = await response.json();
+            return JSON.parse(responseJson.data) || {};
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
         }
+    };
+
+    const addTodos = (newTodos) => {
         const storeDataInHass = async () => {
             try {
+                const remoteStore = await fetchRemoteStore();
+                const persistedTodos = {...remoteStore, ...newTodos};
+
                 const response = await fetch(`${process.env.REACT_APP_HASS_URL}/api/hadb/store`, {
                     method: 'POST',
                     headers: HEADERS,
-                    body: JSON.stringify({ key: TODOS_KEY, value: JSON.stringify(todos) })
+                    body: JSON.stringify({ key: TODOS_KEY, value: JSON.stringify(persistedTodos) })
                 });
 
                 if (!response.ok) {
                     throw new Error('Failed to store data');
                 }
+
+                setTodos(persistedTodos);
             } catch (error) {
                 console.error(error);
             }
         };
 
         storeDataInHass();
-    }, [todos]);
+    }
 
-    useEffect(() => {
-        const getStoreDataFromHass = async () => {
+    const updateTodo = (updatedTodoId, nextTodos) => {
+        const storeDataInHass = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_HASS_URL}/api/hadb/store?key=${TODOS_KEY}`, {
-                    method: 'GET',
-                    headers: HEADERS
+                const remoteStore = await fetchRemoteStore();
+                const updatedStore = {};
+
+                if (updatedTodoId in remoteStore) {
+                    delete remoteStore[updatedTodoId];
+                }
+
+                if (updatedTodoId in nextTodos) {
+                    updatedStore[updatedTodoId] = nextTodos[updatedTodoId];
+                }
+
+                const persistedTodos = {...nextTodos, ...remoteStore, ...updatedStore};
+
+                const response = await fetch(`${process.env.REACT_APP_HASS_URL}/api/hadb/store`, {
+                    method: 'POST',
+                    headers: HEADERS,
+                    body: JSON.stringify({ key: TODOS_KEY, value: JSON.stringify(persistedTodos) })
                 });
 
                 if (!response.ok) {
                     throw new Error('Failed to store data');
                 }
 
-                const responseJson = await response.json();
-                setTodos(JSON.parse(responseJson.data) || {});
+                setTodos(persistedTodos);
             } catch (error) {
                 console.error(error);
             }
         };
 
-        getStoreDataFromHass();
+        storeDataInHass();
+    };
+
+    useEffect(() => {
+        document.location.hash = tab;
+    }, [tab]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNeedRefresh(true);
+        }, 3000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
+
+    useEffect(() => {
+        const handleEvent = () => {
+            setNeedRefresh(true);
+        }
+
+        window.addEventListener('visibilitychange', handleEvent);
+
+        return () => {
+            window.removeEventListener('visibilitychange', handleEvent);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!needRefresh) return;
+
+        const refreshFromRemoteStore = async () => {
+            const remoteItems = await fetchRemoteStore()
+            setTodos({...remoteItems});
+            setNeedRefresh(false);
+        };
+
+        if (needRefresh) {
+            refreshFromRemoteStore();
+        }
+    }, [needRefresh]);
 
     if (todos === null) {
         return <div className="loader">Chargement...</div>;
@@ -115,8 +191,8 @@ function App() {
             </Helmet>
             <div className="App">
                 <TabBar setTab={setTab} current={tab} counters={getTaskCounts(todos)} />
-                <TodoList todos={todos} setTodos={setTodos} tab={tab} />
-                <Footer setTodos={setTodos} todos={todos} tab={tab} />
+                <TodoList todos={todos} updateTodo={updateTodo} tab={tab} />
+                <Footer addTodos={addTodos} tab={tab} />
             </div>
         </>
     );

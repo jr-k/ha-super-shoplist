@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import './TodoItem.css';
 
-function TodoItem({ id, text, striked, checked, tab, onChecked, onStriked, onArchive, onDelete }) {
-    const [strikethrough, setStrikethrough] = useState(striked);
-    const [ticked, setTicked] = useState(checked);
-
+function TodoItem({ id, text, striked, archived, checked, tab, onChecked, onStriked, onArchive, onDelete }) {
     const handleTextClick = () => {
-        setStrikethrough(!strikethrough);
-        onStriked(id, !strikethrough);
+        onStriked(id, !striked);
     };
 
     const handleCheckboxClick = () => {
-        setTicked(!ticked);
-        onChecked(id, !ticked);
+        onChecked(id, !checked);
     };
 
     const handleArchiveClick = () => {
-        onArchive(id, !ticked);
+        onArchive(id, !archived);
     };
 
     const handleDeleteClick = () => {
@@ -24,8 +19,8 @@ function TodoItem({ id, text, striked, checked, tab, onChecked, onStriked, onArc
     };
 
     return (
-        <div className={`todo-item ${strikethrough ? 'strikethrough' : ''} ${ticked ? 'checked' : ''}`}>
-            <input type="checkbox" checked={ticked} onChange={handleCheckboxClick} />
+        <div className={`todo-item ${striked ? 'strikethrough' : ''} ${checked ? 'checked' : ''}`}>
+            <input type="checkbox" checked={checked} onChange={handleCheckboxClick} />
             <span onClick={handleTextClick}>{text}</span>
             <div className="options">
                 <button className={'delete'} onClick={handleDeleteClick}>

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './Footer.css';
 import AddItemModal from "./AddItemModal";
 
-function Footer({ setTodos, todos, tab }) {
+function Footer({ addTodos, tab }) {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const handleAddItems = (items) => {
-        setTodos({...todos, ...items});
+        addTodos(items);
     };
 
     <button onClick={() => setModalOpen(true)}>Ajouter un élément</button>

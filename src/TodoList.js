@@ -4,29 +4,29 @@ import TodoItem from "./TodoItem";
 import categories from "./categories";
 import logic from "./logic";
 
-function TodoList({ todos, setTodos, tab }) {
+function TodoList({ todos, updateTodo, tab }) {
     const toggleDelete = (id) => {
         const newTodos = {...todos};
         delete newTodos[id];
-        setTodos(newTodos);
+        updateTodo(id, newTodos);
     };
 
     const toggleTodo = (id) => {
         const newTodos = {...todos};
         newTodos[id].checked = !newTodos[id].checked;
-        setTodos(newTodos);
+        updateTodo(id, newTodos);
     };
 
     const toggleArchived = (id) => {
         const newTodos = {...todos};
         newTodos[id].archived = !newTodos[id].archived;
-        setTodos(newTodos);
+        updateTodo(id, newTodos);
     };
 
     const toggleStriked = (id) => {
         const newTodos = {...todos};
         newTodos[id].striked = !newTodos[id].striked;
-        setTodos(newTodos);
+        updateTodo(id, newTodos);
     };
 
     const filterTodos = () => {
@@ -48,7 +48,7 @@ function TodoList({ todos, setTodos, tab }) {
     const todosByCategory = groupByCategory(filteredTodos);
     const sortedTodosByCategory = Object.keys(categories).reduce((acc, key) => {
         if (todosByCategory[key]) {
-            acc[key] = todosByCategory[key];
+            acc[key] = todosByCategory[key].sort((a, b) => a.text > b.text ? 1 : -1);
         }
         return acc;
     }, {});
@@ -66,6 +66,7 @@ function TodoList({ todos, setTodos, tab }) {
                                         id={todo.id}
                                         text={todo.text}
                                         tab={logic.getTabByTodo(todo)}
+                                        archived={todo.archived}
                                         checked={todo.checked}
                                         striked={todo.striked}
                                         onChecked={() => toggleTodo(todo.id)}

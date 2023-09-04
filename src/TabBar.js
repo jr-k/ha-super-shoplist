@@ -13,11 +13,10 @@ function TabBar({ setTab, current, counters }) {
                         className={['tab-item ' + (current === tab.id ? 'active' : '')]}
                         onClick={() => setTab(tab.id)}>
                         <div className="inner">
-                            {tab.icon}
                             <div className={'tab-name-inner'}>
-                                <span>{tab.name}</span>
-                                {counters[tab.id] === 0 ? '' : <div className="badge">{counters[tab.id]}</div>}
+                                {tab.icon} {counters[tab.id] === 0 ? '' : <div className="badge">{counters[tab.id]}</div>}
                             </div>
+                            <span>{tab.name}</span>
                         </div>
                     </button>
                 );
