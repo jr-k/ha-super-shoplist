@@ -65,6 +65,7 @@ function TodoList({ todos, setTodos, tab }) {
                                     <TodoItem
                                         id={todo.id}
                                         text={todo.text}
+                                        tab={logic.getTabByTodo(todo)}
                                         checked={todo.checked}
                                         striked={todo.striked}
                                         onChecked={() => toggleTodo(todo.id)}
