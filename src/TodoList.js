@@ -2,6 +2,7 @@ import React from 'react';
 import './TodoList.css';
 import TodoItem from "./TodoItem";
 import categories from "./categories";
+import logic from "./logic";
 
 function TodoList({ todos, setTodos, tab }) {
     const toggleDelete = (id) => {
@@ -29,22 +30,9 @@ function TodoList({ todos, setTodos, tab }) {
     };
 
     const filterTodos = () => {
-        switch (tab) {
-            case 'pending':
-                return Object.keys(todos)
-                    .filter((key) => !todos[key].checked && !todos[key].archived)
-                    .map((key) => todos[key]);
-            case 'checked':
-                return Object.keys(todos)
-                    .filter((key) => todos[key].checked && !todos[key].archived)
-                    .map((key) => todos[key]);
-            case 'archived':
-                return Object.keys(todos)
-                    .filter((key) => todos[key].archived)
-                    .map((key) => todos[key]);
-            default:
-                return todos;
-        }
+        return Object.keys(todos)
+            .filter((key) => logic.getTabByTodo(todos[key]) === tab)
+            .map((key) => todos[key]);
     };
 
     const groupByCategory = (array) => {

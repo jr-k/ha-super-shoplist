@@ -5,6 +5,7 @@ import TabBar from './TabBar';
 import Footer from './Footer';
 import Helmet from 'react-helmet';
 import tabs from "./tabs";
+import logic from "./logic";
 
 const HEADERS = {
     'Authorization': `Bearer ${process.env.REACT_APP_HASS_TOKEN}`,
@@ -91,12 +92,16 @@ function App() {
         Object.keys(todos).forEach((todoId) => {
             const todo = todos[todoId];
 
-            if (!todo.checked && !todo.archived) {
-                counts.pending++;
-            } else if (todo.checked) {
-                counts.checked++;
-            } else if (todo.archived) {
-                counts.archived++;
+            switch(logic.getTabByTodo(todo)) {
+                case 'pending':
+                    counts.pending++;
+                    break;
+                case 'checked':
+                    counts.checked++;
+                    break;
+                case 'archived':
+                    counts.archived++;
+                    break;
             }
         });
 
