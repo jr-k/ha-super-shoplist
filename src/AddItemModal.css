@@ -38,11 +38,19 @@
 }
 
 .modal textarea {
-  min-height: 300px;
+  min-height: 100px;
   max-width: 90%;
   border: 1px solid #ccc;
   margin: 10px 20px;
   box-sizing: border-box;
+}
+
+.modal textarea.keyboard-open {
+  min-height: 100px;
+}
+
+.modal textarea.keyboard-close {
+  min-height: 300px;
 }
 
 .modal textarea:focus {

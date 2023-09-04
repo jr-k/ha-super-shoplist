@@ -6,6 +6,7 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
     const [activeCategory, setActiveCategory] = useState("meat");
     const [textAreas, setTextAreas] = useState({});
     const activeTextAreaRef = useRef(null);
+    const [isKeyboardOpen, setKeyboardOpen] = useState(false);
 
     const handleTextAreaChange = (categoryId, value) => {
         setTextAreas({
@@ -15,16 +16,34 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
     };
 
     useEffect(() => {
+        function handleResize() {
+            const screenHeight = window.visualViewport.height;
+            if (screenHeight < 500) {
+                setKeyboardOpen(true);
+
+            } else {
+                setKeyboardOpen(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
         if (activeTextAreaRef.current) {
             activeTextAreaRef.current.focus();
         }
     }, [activeCategory]);
 
-    useEffect(() => {
-        if (isOpen && activeTextAreaRef.current) {
-            activeTextAreaRef.current.focus();
-        }
-    }, [isOpen]);
+    // useEffect(() => {
+    //     if (isOpen && activeTextAreaRef.current) {
+    //         activeTextAreaRef.current.focus();
+    //     }
+    // }, [isOpen]);
 
     useEffect(() => {
         const handleEscape = (e) => {
@@ -117,6 +136,7 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
                                 key={category.id}
                                 value={textAreas[category.id] || ''}
                                 placeholder={"Element 1\nElement 2"}
+                                className={'keyboard-'+(isKeyboardOpen ? 'open' : 'close')}
                                 onChange={(e) => handleTextAreaChange(category.id, e.target.value)}
                             />
                         </div>
