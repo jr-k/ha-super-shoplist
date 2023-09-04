@@ -36,7 +36,7 @@ function TodoList({ todos, setTodos, tab }) {
                     .map((key) => todos[key]);
             case 'checked':
                 return Object.keys(todos)
-                    .filter((key) => todos[key].checked)
+                    .filter((key) => todos[key].checked && !todos[key].archived)
                     .map((key) => todos[key]);
             case 'archived':
                 return Object.keys(todos)
