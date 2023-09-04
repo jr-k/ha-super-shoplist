@@ -111,7 +111,7 @@ function App() {
             <div className="App">
                 <TabBar setTab={setTab} current={tab} counters={getTaskCounts(todos)} />
                 <TodoList todos={todos} setTodos={setTodos} tab={tab} />
-                <Footer setTodos={setTodos} todos={todos} />
+                <Footer setTodos={setTodos} todos={todos} tab={tab} />
             </div>
         </>
     );

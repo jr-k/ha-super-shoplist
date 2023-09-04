@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Footer.css';
 import AddItemModal from "./AddItemModal";
 
-function Footer({ setTodos, todos }) {
+function Footer({ setTodos, todos, tab }) {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const handleAddItems = (items) => {
@@ -14,6 +14,7 @@ function Footer({ setTodos, todos }) {
     return (
         <>
             <AddItemModal
+                tab={tab}
                 isOpen={isModalOpen}
                 onClose={() => setModalOpen(false)}
                 addItems={handleAddItems}

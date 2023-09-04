@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './AddItemModal.css';
 import categories from "./categories";
+import tabs from "./tabs";
 
-export default function AddItemModal({ isOpen, onClose, addItems }) {
-    const [activeCategory, setActiveCategory] = useState("meat");
+export default function AddItemModal({ isOpen, onClose, addItems, tab }) {
+    const [activeCategory, setActiveCategory] = useState(Object.keys(categories)[0]);
     const [textAreas, setTextAreas] = useState({});
     const activeTextAreaRef = useRef(null);
     const [isKeyboardOpen, setKeyboardOpen] = useState(false);
@@ -83,7 +84,7 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
             const lines = textAreas[categoryId].split('\n');
             lines.forEach(line => {
                 if (line.trim() !== '') {
-                    items[line] = {
+                    const baseItem = {
                         text: line,
                         id: line,
                         category: categoryId,
@@ -91,6 +92,8 @@ export default function AddItemModal({ isOpen, onClose, addItems }) {
                         checked: false,
                         archived: false
                     };
+
+                    items[line] = {...baseItem, ...tabs[tab].defaultOptions};
                 }
             });
         });
