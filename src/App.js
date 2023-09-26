@@ -26,6 +26,7 @@ const TODOS_KEY = window.location.pathname.replace(process.env.PUBLIC_URL, '').s
 console.info("Using todos key: ", TODOS_KEY);
 
 function App() {
+    const [init, setInit] = useState(true);
     const [needRefresh, setNeedRefresh] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [todos, setTodos] = useState(null);
@@ -51,6 +52,7 @@ function App() {
             console.error(error);
         } finally {
             setIsLoading(false);
+            setInit(false);
         }
     };
 
@@ -183,6 +185,10 @@ function App() {
 
         return counts;
     };
+
+    if (init) {
+        return null;
+    }
 
     return (
         <>

@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.todo-item:hover {
+  background: #eee;
+}
+
 .todo-item span {
   flex: 1;
   align-self: stretch;
