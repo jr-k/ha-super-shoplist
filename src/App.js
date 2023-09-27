@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Helmet from 'react-helmet';
 import tabs from "./tabs";
 import logic from "./logic";
+import useSwipeTabs from "./useSwipeTabs";
 
 const HEADERS = {
     'Authorization': `Bearer ${process.env.REACT_APP_HASS_TOKEN}`,
@@ -31,6 +32,8 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [todos, setTodos] = useState(null);
     const [tab, setTab] = useState(getInitialTab() || 'pending');
+
+    useSwipeTabs(tab, setTab, Object.keys(tabs));
 
     const fetchRemoteStore = async () => {
         if (isLoading) return;
