@@ -33,7 +33,7 @@ function App() {
     const [todos, setTodos] = useState(null);
     const [tab, setTab] = useState(getInitialTab() || 'pending');
 
-    useSwipeTabs(tab, setTab, Object.keys(tabs));
+    //useSwipeTabs(tab, setTab, Object.keys(tabs));
 
     const fetchRemoteStore = async () => {
         if (isLoading) return;
