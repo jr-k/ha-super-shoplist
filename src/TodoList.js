@@ -12,20 +12,17 @@ function TodoList({ todos, updateTodo, tab }) {
     };
 
     const toggleTodo = (id) => {
-        const newTodos = {...todos};
-        newTodos[id].checked = !newTodos[id].checked;
+        const newTodos = {...todos, [id]: {...todos[id], checked: !todos[id].checked, striked: false}};
         updateTodo(id, newTodos);
     };
 
     const toggleArchived = (id) => {
-        const newTodos = {...todos};
-        newTodos[id].archived = !newTodos[id].archived;
+        const newTodos = {...todos, [id]: {...todos[id], archived: !todos[id].archived, checked: false, striked: false}};
         updateTodo(id, newTodos);
     };
 
     const toggleStriked = (id) => {
-        const newTodos = {...todos};
-        newTodos[id].striked = !newTodos[id].striked;
+        const newTodos = {...todos, [id]: {...todos[id], striked: !todos[id].striked}};
         updateTodo(id, newTodos);
     };
 
